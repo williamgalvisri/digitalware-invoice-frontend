@@ -1,0 +1,10 @@
+<dx-data-grid id="gridContainer" [dataSource]="data" [showBorders]="true">
+  <dxi-column
+    *ngFor="let column of columns"
+    [dataField]="column.key"
+    [caption]="column.label"
+    [format]="column.format"
+    [dataType]="column.dataType"
+    [sortOrder]="column.sort"
+  ></dxi-column>
+</dx-data-grid>

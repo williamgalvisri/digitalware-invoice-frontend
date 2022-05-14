@@ -1,0 +1,14 @@
+<main class="flex flex-row h-screen">
+    <section>
+        <app-sidebar [options]="menu"></app-sidebar>
+    </section>
+    <div class="w-full p-4">
+        <section class="flex flex-col">
+            <span class="w-full text-2xl font-bold text-gray-900">{{header?.title}}</span>
+            <span class="w-full text-gray-600 mt-2">{{header?.description}}</span>
+        </section>
+        <section class="mt-6">
+            <ng-content></ng-content>
+        </section>
+    </div>
+</main>
