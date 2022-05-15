@@ -17,7 +17,7 @@ export class ApiMethodHelpper {
     }
 
     public Post<T>(url: string, payload: any) {
-        return this.http.post<ApiReponseInterface<T>>(`${this.apiMethod}/${url}`, payload).pipe(map(res => res.response.data))
+        return this.http.post<ApiReponseInterface<T>>(`${this.apiMethod}/${url}`, payload)
     }
 
     public Put<T>(url: string, payload: any) {

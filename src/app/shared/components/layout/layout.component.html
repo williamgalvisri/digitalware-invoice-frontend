@@ -2,7 +2,7 @@
     <section>
         <app-sidebar [options]="menu"></app-sidebar>
     </section>
-    <div class="w-full p-4">
+    <div class="w-full p-4 bg-neutral-100">
         <section class="flex flex-col">
             <span class="w-full text-2xl font-bold text-gray-900">{{header?.title}}</span>
             <span class="w-full text-gray-600 mt-2">{{header?.description}}</span>
@@ -10,5 +10,8 @@
         <section class="mt-6">
             <ng-content></ng-content>
         </section>
+        <dx-load-panel
+            [visible]="isLoading">
+        </dx-load-panel>
     </div>
 </main>

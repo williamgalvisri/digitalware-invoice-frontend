@@ -1,11 +1,18 @@
 <section>
-    <section class="w-full flex justify-end py-4">
-        <dx-button
-            icon="plus">
-            Crear factura
-        </dx-button>
-    </section>
-    <section class="w-full">
-        <app-table [columns]="invoicesColumnsTable" [data]="invoices"></app-table>
-    </section>
+  <section class="w-full flex justify-end py-4">
+    <dx-button
+        icon="plus"
+        text="Crear Factura"
+        (onClick)="redirectedToCreateInvoice()"
+    >
+    </dx-button>
+  </section>
+  <section class="w-full">
+    <app-table
+      [columns]="invoicesColumnsTable"
+      [data]="invoices"
+      [isLoading]="isLoading"
+      (onEmmiSelectedRow)="handleInvoiceSelected($event)"
+    ></app-table>
+  </section>
 </section>

@@ -1,0 +1,104 @@
+<div>
+  <ng-container [ngTemplateOutlet]="headerInvoice"></ng-container>
+  <ng-container [ngTemplateOutlet]="tableProducts"></ng-container>
+  <ng-container [ngTemplateOutlet]="footerInvoice"></ng-container>
+</div>
+
+<ng-template #headerInvoice>
+    <section [formGroup]="createInvoiceFormGroup">
+        <dx-select-box
+          formControlName="idCustomer"
+          displayExpr="name"
+          [dataSource]="customers"
+          valueExpr="id"
+          label="Selecciona un cliente"
+          [showClearButton]="true"
+          labelMode="floating"
+          [searchEnabled]="true"
+        ></dx-select-box>
+        <section class="mt-4">
+          <dx-text-box
+            formControlName="consecutive"
+            [label]="'Consecutivo'"
+            [disabled]="true"
+          ></dx-text-box>
+        </section>
+    </section>
+</ng-template>
+
+<ng-template #tableProducts>
+  <div class="mt-4" id="data-grid-demo">
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="products"
+      keyExpr="id"
+      [showBorders]="true"
+    >
+      <dxo-paging [enabled]="false"></dxo-paging>
+      <dxo-editing
+        mode="row"
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+      >
+      </dxo-editing>
+
+      <dxi-column
+        dataField="id"
+        caption="Producto"
+        [setCellValue]="setCellProduct"
+      >
+        <dxo-lookup
+          [dataSource]="productsWithPrice"
+          displayExpr="name"
+          valueExpr="id"
+        >
+        </dxo-lookup>
+      </dxi-column>
+      <dxi-column
+        dataField="count"
+        caption="Cantidad"
+        dataType="number"
+        [setCellValue]="setCellCount"
+      ></dxi-column>
+      <dxi-column
+        dataField="price"
+        [allowEditing]="false"
+        caption="Precio unitario"
+        format="$,###,###,##0.00"
+        [editorOptions]="{ format: '$,###,###,##0.00' }"
+        dataType="currency"
+      ></dxi-column>
+      <dxi-column
+        dataField="totalPrice"
+        [allowEditing]="false"
+        format="$,###,###,##0.00"
+        [editorOptions]="{ format: '$,###,###,##0.00' }"
+        caption="Precio"
+        dataType="currency"
+      ></dxi-column>
+      <dxo-summary>
+        <dxi-total-item
+          column="totalPrice"
+          summaryType="sum"
+          showInColumn="totalPrice"
+          valueFormat="currency"
+          displayFormat="Total : {0}"
+        >
+        </dxi-total-item>
+      </dxo-summary>
+    </dx-data-grid>
+  </div>
+</ng-template>
+
+<ng-template #footerInvoice>
+  <div class="mt-4 w-full flex justify-end">
+    <dx-button
+      icon="save"
+      [text]="!isEditing() ? 'Guardar' : 'Editar'"
+      [disabled]="isValid"
+      (onClick)="!isEditing() ? saveInvoice() : updateInvoice()"
+    >
+    </dx-button>
+  </div>
+</ng-template>

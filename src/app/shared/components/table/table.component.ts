@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ColumnsInterface } from 'src/app/core/models/interfaces/table.interface';
 
 @Component({
@@ -10,10 +10,18 @@ export class TableComponent implements OnInit {
   @Input() columns: ColumnsInterface[] = []
   @Input() data: any[] = []
   @Input() identifiers: string = 'id';
-  
+  @Input() isLoading: boolean = false;
+  @Output() onEmmiSelectedRow = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  handleRowClick(e: any) {
+    if(e.rowType === "data") {
+        this.onEmmiSelectedRow.emit(e.data)
+    }
   }
 
 }

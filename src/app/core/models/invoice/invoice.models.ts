@@ -1,3 +1,4 @@
+import { ProductWithPriceWithCount } from "../product/product.model";
 
 export class Invoice{
     id: number;
@@ -6,6 +7,7 @@ export class Invoice{
     lastName: string;
     consecutive: string;
     datePurchase: string;
+    idCustomerFk: number;
     constructor(item?: Invoice) {
         this.id = item?.id ?? 0;
         this.dni = item?.dni ?? '';
@@ -13,6 +15,7 @@ export class Invoice{
         this.lastName = item?.lastName ?? '';
         this.consecutive = item?.consecutive ?? '';
         this.datePurchase = item?.datePurchase ?? '';
+        this.idCustomerFk = item?.idCustomerFk ?? 0;
     }
 }
 
@@ -23,5 +26,13 @@ export class InvoiceView extends Invoice{
         super(item);
         this.fullName = item?.fullName ?? '';
         this.parseDate = item?.parseDate ?? '';
+    }
+}
+
+export class InvoiceWithDetail extends Invoice {
+    products: ProductWithPriceWithCount[];
+    constructor(item?: InvoiceWithDetail) {
+        super(item);
+        this.products = item?.products ?? [];
     }
 }

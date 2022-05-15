@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
-import { DxButtonModule, DxDataGridModule, DxFormModule, DxToastModule } from 'devextreme-angular';
+import { DxButtonModule, DxDataGridModule, DxFormModule, DxLookupModule, DxSelectBoxModule, DxTextBoxModule, DxToastModule } from 'devextreme-angular';
 
 @NgModule({
     imports: [
         DxDataGridModule,
         DxButtonModule,
         DxFormModule,
-        DxToastModule
+        DxToastModule,
+        DxSelectBoxModule,
+        DxTextBoxModule,
+        DxLookupModule
     ],
     exports: [
         DxButtonModule,
         DxDataGridModule,
         DxFormModule,
-        DxToastModule
+        DxToastModule,
+        DxSelectBoxModule,
+        DxTextBoxModule,
+        DxLookupModule
     ]
 })
 
